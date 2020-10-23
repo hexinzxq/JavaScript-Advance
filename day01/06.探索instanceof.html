@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>探索instanceof</title>
+</head>
+<body>
+<!--
+判断左边的对象是否是右边这个对象的实例
+1.instanceof是如何判断的？
+      *表达式： A instanceof B[A是一个实例对象（具有隐式原型属性），B是一个构造函数对象（具有显式原型属性）]
+      *如果B函数的显式原型对象在A对象的原型链上，返回true，否则返回false
+2.Function是通过new自己产生的实例
+-->
+<script type="text/javascript">
+    /*
+    * 案例1
+    * */
+    function Foo() {}
+    var f1 = new Foo();
+    console.log(f1 instanceof Foo);//true
+    console.log(f1 instanceof Object);//true
+    /*
+    * 案例2
+    * */
+    console.log("======================");
+    console.log(Object.__proto__.__proto__);
+    //原因1：所有函数都是Function的实例，此处的Object是一个函数
+    //原因2：所有函数的对象都是Object的实例，但Object除外，它是函数Function的实例
+    console.log(Object instanceof Function);//true???（原因1）
+    console.log(Object instanceof Object);//true??????（原因1）
+    console.log(Function instanceof Function);//true
+    console.log(Function instanceof Object);//ture
+    function Foo() {}
+
+    console.log(Object instanceof Foo);//false????(已解决，原因2)
+</script>
+</body>
+</html>

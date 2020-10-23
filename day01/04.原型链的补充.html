@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原型链的补充</title>
+</head>
+<body>
+<!--
+1.函数的显式原型指向的对象：默认是空的Object实例对象
+  （但是Object不满足）
+2.所有函数都是Function的实例，包含Function本身；
+3.Object的原型对象时原型链的尽头
+-->
+<script>
+    console.log(Object.__proto__);
+    console.log(Object.constructor === Object.prototype);
+    console.log(Object.prototype.prototype);
+    console.log(Object.prototype.__proto__);
+</script>
+</body>
+</html>
