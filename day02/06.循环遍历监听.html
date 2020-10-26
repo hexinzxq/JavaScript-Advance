@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>循环遍历监听</title>
+</head>
+<body>
+<!--
+JS高级两大难关：
+原型！！！！
+闭包！！！！
+-->
+<button>测试1</button>
+<button>测试2</button>
+<button>测试3</button>
+<!--需求：点击某个按钮，提示“点击的是第n个按钮”-->
+<script>
+    var btns = document.getElementsByTagName("button");
+//    遍历加载监听
+    /*for (var i=0, length = btns.length ;i<btns.length;i++){
+        var obj = btns[i];
+        obj.onclick = function () {
+            alert("第"+(i+1)+"个");
+        }
+    }*/
+
+/*    for (var i=0, length = btns.length ;i<btns.length;i++){
+        var btn = btns[i];
+        //将btn对应的下标保存在btn上
+        btn.index = i;
+        btn.onclick = function () {
+            alert("第"+(this.index+1)+"个");
+        }
+    }*/
+
+
+    //此处利用到了闭包的技术！！！！
+    for (var i=0, length = btns.length ;i<btns.length;i++){
+        (function (i) {
+            var obj = btns[i];
+            obj.onclick = function () {
+                alert("第"+(i+1)+"个");
+            }
+        })(i);
+    }
+</script>
+</body>
+</html>
