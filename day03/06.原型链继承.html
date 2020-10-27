@@ -5,6 +5,43 @@
     <title>原型链继承</title>
 </head>
 <body>
+<!--
+方式1：原型链继承
+  1.套路(基本步骤★)
+    *①.定义父类型构造函数
+    *②.给父类型的原型添加方法
+    *③.定义子类型的构造函数
+    *④.创建父类型的对象赋值给子类型的原型★
+    *⑤.将子类型原型的构造属性设置为子类型
+    *⑥.给子类型原型添加方法
+    *⑦.创建子类型的对象：可以去调用父类型的方法
+  2.关键
+    *①.子类型的原型为父类型的一个实例对象★★★★★
+-->
+<script>
+    //父类型
+    function Supper() {
+        this.supProp = 'Supper propery';
+    }
+    Supper.prototype.showSupperProp = function () {
+        console.log(this.supProp);
+    }
+    //子类型
+    //将子类的原型设置为父类的实例才能变成其子类，才能调用父类的方法
+    Sub.prototype = new Supper(); //★★★★★★★★★★
+    Sub.prototype.constructor = Sub;//让子类型的原型的constructor指向子类型（符合常理）★★★★★★
+    function Sub() {
+        this.subProp = 'Sub property';
+    }
+    Sub.prototype.showSubProp = function () {
+        console.log(this.subProp);
+    }
+    var sub = new Sub();
+    sub.showSupperProp();
+    sub.showSubProp();
 
+    //查看这个实例对象的构造函数是谁
+    console.log(sub.constructor);//Sub（重点参考第33行注释），不那样的话就会指向父类型
+</script>
 </body>
 </html>
